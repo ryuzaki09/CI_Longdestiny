@@ -1,0 +1,26 @@
+.author { font-size:12px; font-style:italic; }
+.bord_bot { border-top: 1px solid #cacaca; padding:10px; }
+.cont { width:820px; margin:0 auto; text-align: center; padding:10px; border:1px solid #cacaca; font-family:Arial; }
+
+.clearfix:after {
+	clear: both;
+	display: block;
+	content: " ";
+	height: 0px;
+	visibility: hidden;
+}
+.clearfix { display: inline-block; }
+/* Hide these rules from IE-mac \*/
+* html .clearfix {
+	height: 1%;
+}
+.clearfix { display: block; }
+li.clearfix {
+	display: list-item;
+}
+/* End hide from IE-mac */
+
+.list_cont { width:200px; float:left; }
+.list_cont img { opacity:0.6; }
+.list_cont img:hover { opacity:1; }
+.title { background-color:#64aeef; color:#FFFFFF; font-size:34px; padding:10px; }

@@ -1,0 +1,79 @@
+body {
+	margin:0;
+	min-height:800px; 
+	background-color: #ffffff;
+
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#d2dae7');
+/*INNER ELEMENTS MUST NOT BREAK THIS ELEMENTS BOUNDARIES*/
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#d2dae7')";
+/*Element must have a height (not auto)*/
+/*All filters must be placed together*/
+background-image: -moz-linear-gradient(top, #ffffff, #d2dae7);
+background-image: -ms-linear-gradient(top, #ffffff, #d2dae7);
+background-image: -o-linear-gradient(top, #ffffff, #d2dae7);
+background-image: -webkit-gradient(linear, center top, center bottom, from(#ffffff), to(#d2dae7));
+background-image: -webkit-linear-gradient(top, #ffffff, #d2dae7);
+background-image: linear-gradient(top, #ffffff, #d2dae7);
+
+
+}
+a { text-decoration:none; }
+ul { margin: 0; padding-left:20px; }
+li { font-size:13px; }
+
+/* containers */
+.container {
+	width:960px; margin:0 auto; background: url(../images/back.jpg) no-repeat; min-height:400px; background-color:#fff;
+}
+
+.left_col { width:150px; float:left; }
+.right_col { width:220px; float:right; }
+.footer { 
+	 
+	min-height:30px; 
+	width:960px; 
+	margin:0 auto; 
+	font-size:13px; 
+	text-align:center;
+}
+.footer_in_wrapper { width:967px; float:right; background: url(../images/footer.jpg) no-repeat; }
+.footer_cont { text-align:center; } 
+.footer_cont a { color: #fff; text-decoration:none; padding:0 5px;}
+.footer_cont a:hover { text-decoration:underline; }
+.footer_copyright { float:right; padding-right:10px; color:#fff; }
+
+
+/* misc classes */
+.clearfix:after {
+	clear: both;
+	display: block;
+	content: " ";
+	height: 0px;
+	visibility: hidden;
+}
+.clearfix { display: inline-block; }
+/* Hide these rules from IE-mac \*/
+* html .clearfix {
+	height: 1%;
+}
+.clearfix { display: block; }
+li.clearfix {
+	display: list-item;
+}
+/* End hide from IE-mac */
+
+
+.bot10 { margin-bottom:10px; }
+.bot20 { margin-bottom:20px; }
+.block70 { width:70px; float:left; }
+.block120 { width:120px; float:left; }
+.loginbtn { background-color: #494a9d; color:#fff; padding:2px 15px; border:none; }
+.pad10 { padding-top:10px; }
+.purptxt { color:#494A9D; }
+.txtsize { height: 10px; margin-top:3px; }
+
+.small_purptxt { color:#494A9D; font-size:13px; }
+.small_purptxt a { color:#494A9D; font-size:13px; }
+.small_purptxt a:hover { text-decoration:underline; }
