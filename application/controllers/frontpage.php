@@ -9,7 +9,9 @@ class Frontpage extends CI_Controller {
   
     
     function index(){
-        //error_reporting(E_ALL);
+error_log('index page here');
+	$this->logger->testerror("test");
+	$this->logger->info("frontpage called");
         $this->load->model('fpmodel');
         
         $data['data'] = $this->fpmodel->all_frontpage_data();
@@ -30,6 +32,7 @@ class Frontpage extends CI_Controller {
     
     function contact_msg(){
     if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
+	$this->logger->info("contact started");
         $this->load->helper('email');
         $from = $this->input->post('name', true);
         $email = $this->input->post('email', true);

@@ -47,8 +47,9 @@ $('#send').click(function(){
                $('#reset_form').click();
                
            } else {
-               alert('Cannot send');
-           }
+               //alert('Cannot send');
+           alert(data);
+	   }
         });
     }
 
