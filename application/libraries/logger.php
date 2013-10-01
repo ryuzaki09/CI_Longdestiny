@@ -8,17 +8,13 @@ class Logger {
 
 
 	public function info($info){
-		$file = "/var/log/dev/longdestiny/longdestiny.log";
-		/*if(!file_exists($file)){
-			$log = fopen($file, "x");	
-		} else {
-			$log = fopen($file, "w");	
-		}*/
-		$date = date('Y/m/d H:i:s');
-		$fp = fopen($file, "a");
-		fwrite($fp, "[".$date."][INFO] - ".$info."\n");
-		fclose($fp);
-	
+		if($info){
+			$file = "/var/log/dev/longdestiny/longdestiny.log";
+			$date = date('Y/m/d H:i:s');
+			$fp = fopen($file, "a");
+			fwrite($fp, "[".$date."][INFO] - ".$info."\n");
+			fclose($fp);
+		}
 	}
 
 

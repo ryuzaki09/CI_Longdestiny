@@ -9,9 +9,6 @@ class Frontpage extends CI_Controller {
   
     
     function index(){
-error_log('index page here');
-	$this->logger->testerror("test");
-	$this->logger->info("frontpage called");
         $this->load->model('fpmodel');
         
         $data['data'] = $this->fpmodel->all_frontpage_data();
