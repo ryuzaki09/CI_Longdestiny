@@ -8,7 +8,7 @@ class Frontpage extends CI_Controller {
     }
   
     
-    function index(){
+    public function index(){
         $this->load->model('fpmodel');
         
         $data['data'] = $this->fpmodel->all_frontpage_data();
@@ -27,9 +27,9 @@ class Frontpage extends CI_Controller {
     }
     
     
-    function contact_msg(){
+    public function contact_msg(){
     if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
-	$this->logger->info("contact started");
+		$this->logger->info("contact started");
         $this->load->helper('email');
         $from = $this->input->post('name', true);
         $email = $this->input->post('email', true);
@@ -68,9 +68,11 @@ class Frontpage extends CI_Controller {
             if ($copy != "") { $to = $to . "," . $email; }
                                 
             if (mail($to, $subject, $body, $headers)) {
-   			echo "true";
+				$this->logger->info("email sent to ".$email);
+				echo "true";
             } else {
-   			echo "Message delivery failed...";
+				$this->logger->info("cannot send email to ".$email);
+				echo "Message delivery failed...";
             }	
 	        
         } else {
