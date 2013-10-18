@@ -200,6 +200,7 @@ if (defined('ENVIRONMENT'))
  *
  */
 require_once BASEPATH.'core/CodeIgniter.php';
+require_once '/var/www/common/autoloader.php';
 
 /* End of file index.php */
 /* Location: ./index.php */

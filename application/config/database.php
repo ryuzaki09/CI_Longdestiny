@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require_once '/var/www/common/commonclass.php';
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -48,11 +49,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-//$db['default']['hostname'] = 'longdestinycom.ipagemysql.com';
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'qwerty';
-$db['default']['database'] = 'longdestiny';
+$db['default']['username'] = commonclass::getConfig('database.mysql_username');
+$db['default']['password'] = commonclass::getConfig('database.mysql_password'); 
+$db['default']['database'] = commonclass::getConfig('database.mysql_dbname'); 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
