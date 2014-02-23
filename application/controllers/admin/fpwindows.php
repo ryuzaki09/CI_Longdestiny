@@ -1,7 +1,7 @@
 <?php
 class Fpwindows extends CI_Controller {
     
-    function __construct(){
+    public function __construct(){
         parent::__construct();
         $this->load->library('adminpage');
         $this->load->library('auth');  
@@ -12,11 +12,11 @@ class Fpwindows extends CI_Controller {
         
     }
     
-   function index(){
+   public function index(){
        $this->addnew();
    } 
     
-   function addnew(){
+   public function addnew(){
        //error_reporting(E_ALL);
        $login = $this->auth->is_logged_in();
         
@@ -193,22 +193,20 @@ class Fpwindows extends CI_Controller {
     }
   
    
-   function delete_window(){
+   public function delete_window(){
        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
            
            $id      = ($this->input->post('id', true)*1);
            $result = $this->adminmodel->delete_window($id);
 
-           if($result) {
-               echo "true";
-           } else {                      
-               echo "Something went wrong! Unable to delete.";
-           }
+           echo ($result)
+		? "true"
+		: "Something went wrong! Unable to delete.";
        }         
        
    }
    
-   function delete_subphoto(){
+   public function delete_subphoto(){
        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
            $photoid     = ($this->input->post('id', true)*1);
            $foldername  = $this->input->post('foldername', true);
