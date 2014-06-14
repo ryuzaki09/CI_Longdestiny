@@ -5,8 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
         <title>Longdestiny | Portfolio</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <meta name="description" content="3D Gallery with CSS3 and jQuery" />
-        <meta name="keywords" content="3d, gallery, jquery, css3, auto, slideshow, navigate, mouse scroll, perspective" />
         <meta name="author" content="Longdestiny" />
         <link rel="shortcut icon" href="../favicon.ico"> 
         <link rel="stylesheet" type="text/css" href="/css/3dgallery/3dgallery.css" />
@@ -37,12 +35,17 @@
 			</header>
 			<section id="dg-container" class="dg-container">
 				<div class="dg-wrapper">
-                                    <?php if(is_array($result) && !empty($result)){ 
-                                            foreach($result AS $portfolio){ ?>
-                                            <a href="http://<?php echo $portfolio['port_link']; ?>" target="_blank"><img style="max-width:480px; max-height:260px;" src="/media/images/portfolio/<?php echo $portfolio['port_img']; ?>" alt="image01"><div><?php echo $portfolio['port_link']; ?></div></a>
-                                    
-                                    <?php   } 
-                                        } ?>
+					<?php 
+					if(is_array($result) && !empty($result)){ 
+						foreach($result AS $portfolio): ?>
+							<a href="http://<?php echo $portfolio['port_link']; ?>" target="_blank">
+							<img style="max-width:480px; max-height:260px;" src="/media/images/portfolio/<?php echo $portfolio['port_img']; ?>" alt="image01" />
+							<div><?php echo $portfolio['port_link']; ?></div>
+							</a>
+					
+						<?php
+						endforeach;
+					} ?>
 					<a href="#"><img src="/media/images/portfolio/1.jpg" alt="image01"><div>http://www.colazionedamichy.it/</div></a>
 					<a href="#"><img src="/media/images/portfolio/2.jpg" alt="image02"><div>http://www.percivalclo.com/</div></a>
 					<a href="#"><img src="/media/images/portfolio/3.jpg" alt="image03"><div>http://www.wanda.net/fr</div></a>					
