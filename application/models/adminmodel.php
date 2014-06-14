@@ -2,19 +2,18 @@
 
 class Adminmodel extends Commonmodel {
         
-    function __construct(){
+    public function __construct(){
         parent::__construct();
-        $this->load->model('commonmodel');
     }
     
-    function adminlogin($username, $password){        
+    public function adminlogin($username, $password){        
         $this->db->select('id');
         $this->db->where('name', $username);
         $this->db->where('pwd', $password);
         $result = $this->db->get($this->table['adminusers']);
                 
         if ($result){
-        return ($result->num_rows()>0)
+			return ($result->num_rows()>0)
                 ? $result->row()
                 : false;
         }else {
@@ -22,19 +21,19 @@ class Adminmodel extends Commonmodel {
         }        
     }
     
-    function retrieve_data($id){
+    public function retrieve_data($id){
         
         $this->db->where('id', $id);
                 
         $result = $this->db->get($this->table['frontpage']);
         
         return ($result->num_rows() > 0)
-        ? $result->row()
-        : false;
+				? $result->row()
+				: false;
         
     }
     
-    function retrieve_fpphotos($id, $foldername=false){
+    public function retrieve_fpphotos($id, $foldername=false){
         $this->db->where('windowID', $id);
         
         if($foldername){
@@ -56,7 +55,7 @@ class Adminmodel extends Commonmodel {
                 
     }
     
-    function update_fpphotos($id, $imgname){
+    public function update_fpphotos($id, $imgname){
         $this->db->where('windowID', $id);
         $this->db->set('imgname', $imgname);
         
@@ -64,12 +63,12 @@ class Adminmodel extends Commonmodel {
         
     }
     
-    function update_window($id, $data){
+    public function update_window($id, $data){
         $this->db->where('id', $id);
         return $this->db->update($this->table['frontpage'], $data);
     }
     
-    function delete_window($id){
+    public function delete_window($id){
         $this->db->where('id', $id);
         $result = $this->db->get($this->table['frontpage']);
         
@@ -82,7 +81,7 @@ class Adminmodel extends Commonmodel {
         $this->db->where('id', $id);
         $result2 = $this->db->delete($this->table['frontpage']);       
         
-        if(mysql_affected_rows() > 0){
+        if($this->db->affected_rows() > 0){
             
             return ($this->__delete_fpphotos($id))
                    ? true
@@ -94,7 +93,7 @@ class Adminmodel extends Commonmodel {
         
     }
     
-    function __delete_fpphotos($id){
+    public function __delete_fpphotos($id){
         $this->db->where('windowID', $id);
         $result = $this->db->get($this->table['fpphotos']);
         
@@ -105,8 +104,8 @@ class Adminmodel extends Commonmodel {
                unlink($_SERVER['DOCUMENT_ROOT'].'/media/images/frontpage/thumb/'.$img['imgname']);                
             }
             $this->db->where('windowID', $id);
-            $result2 = $this->db->delete($this->table['fpphotos']);
-            return (mysql_affected_rows()>0)
+            $this->db->delete($this->table['fpphotos']);
+            return ($this->db->affected_rows()>0)
                     ? true
                     : false;                  
             
@@ -116,24 +115,23 @@ class Adminmodel extends Commonmodel {
     }
     
         
-    function changepwd($data, $where){
+    public function changepwd($data, $where){
         $this->db->where('name', $where);
         return $this->db->update($this->table['adminusers'], $data);
         
     }
     
-    function fetch_albums(){
+    public function fetch_albums(){
         $result = $this->db->get($this->table['photoalbum']);
-        return ($result >= 1)
+        return ($result)
             ? $result->result_array()
             : false;
     }
     
-    function add_new_album($foldername){
+    public function add_new_album($foldername){
         $this->db->set('folder_name', $foldername);        
         return $this->db->insert($this->table['photoalbum']);
     }
     
     
 }
-?>

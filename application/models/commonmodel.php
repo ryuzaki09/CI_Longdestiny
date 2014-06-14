@@ -1,7 +1,7 @@
 <?php
 
 class Commonmodel extends CI_Model {
-    var $table = array('frontpage' => 'longdestiny.frontpage',
+    public $table = array('frontpage' => 'longdestiny.frontpage',
                        'fpphotos' => 'longdestiny.fpphotos',
                        'photoalbum' => 'longdestiny.albumFolder',
                        'adminusers' => 'longdestiny.adminusers',
@@ -10,4 +10,3 @@ class Commonmodel extends CI_Model {
 
     
 }
-?>
