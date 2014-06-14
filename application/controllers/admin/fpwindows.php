@@ -5,7 +5,6 @@ class Fpwindows extends CI_Controller {
         parent::__construct();
         $this->load->library('adminpage');
         $this->load->library('auth');  
-        $this->load->model('commonmodel');
         $this->load->model('fpmodel');
         $this->load->model('adminmodel');
         $this->load->library('upload');  
@@ -70,7 +69,7 @@ class Fpwindows extends CI_Controller {
        }             
    }
    
-   function listing(){
+   public function listing(){
        $login = $this->auth->is_logged_in();
         
        if($login){
@@ -85,7 +84,7 @@ class Fpwindows extends CI_Controller {
        
    }
    
-   function edit($id){ 
+   public function edit($id){ 
        //error_reporting(E_ALL);      
        $id      = $id*1;      
        if ($this->input->post('update') == "Update"){
@@ -148,8 +147,7 @@ class Fpwindows extends CI_Controller {
        $this->adminpage->loadpage('admin/fpwindow/addnew', $data);       
    }
    
-   function subphotos($id){
-       error_reporting(E_ALL);
+   public function subphotos($id){
        $login = $this->auth->is_logged_in();        
        if($login == true){
             $id = $id*1;
@@ -167,16 +165,16 @@ class Fpwindows extends CI_Controller {
                 
                 Foreach($files AS $imgfile => $imgname){ //go through each img upload
                     if($imgfile['name'] != ""){ //check to see if it's empty
-			if($this->upload->do_upload($imgfile)){  //if not empty then upload
-                            $this->fpmodel->addphotos('thumbs', $imgname['name'], $id);
-                            $data['imgfiles'][] = $imgname['name']." has been uploaded to thumbs folder<br/>";
-			} else {
+						if($this->upload->do_upload($imgfile)){  //if not empty then upload
+										$this->fpmodel->addphotos('thumbs', $imgname['name'], $id);
+										$data['imgfiles'][] = $imgname['name']." has been uploaded to thumbs folder<br/>";
+						} else {
                             $data['imgfiles'][] = $this->upload->display_errors();
                         }
                     } else{
                         $data['imgfiles'][] = "No file selected";
                     }
-		}//end foreach                
+				}//end foreach                
             }
             
             $data['item'] = $this->adminmodel->retrieve_data($id);
@@ -200,8 +198,8 @@ class Fpwindows extends CI_Controller {
            $result = $this->adminmodel->delete_window($id);
 
            echo ($result)
-		? "true"
-		: "Something went wrong! Unable to delete.";
+				? "true"
+				: "Something went wrong! Unable to delete.";
        }         
        
    }
@@ -229,7 +227,7 @@ class Fpwindows extends CI_Controller {
        }
    }
    
-   function __update_file_upload($config, $files, $id){
+   public function __update_file_upload($config, $files, $id){
        $this->upload->initialize($config);
                    
        if($this->upload->do_upload($files)){  //upload new image
@@ -239,32 +237,31 @@ class Fpwindows extends CI_Controller {
        } else {                        
             return false;
        }       
-   }
+	}
    
-   function cropfile(){
+	public function cropfile(){
        error_reporting(E_ALL);
               
-   	$x1 = $this->input->post('x1', true);
-	$y1 = $this->input->post('y1', true);		
+		$x1 = $this->input->post('x1', true);
+		$y1 = $this->input->post('y1', true);		
         $w = $this->input->post('w', true);
         $h = $this->input->post('h', true);
         $current_img = $this->input->post('current_img', true);
         
-	$this->load->library('fileuploads');
+		$this->load->library('fileuploads');
         
         //Scale the image to the 100px by 100px  
         $scale = 100/$w;        
-	$cropped = $this->fileuploads->resizeThumbnailImage($_SERVER['DOCUMENT_ROOT']."/media/images/frontpage/thumbs/".$current_img, $_SERVER['DOCUMENT_ROOT']."/media/images/frontpage/".$current_img, $w, $h, $x1, $y1, $scale);
+		$filelocation = $_SERVER['DOCUMENT_ROOT']."/media/images/frontpage/";
+		$cropped = $this->fileuploads->resizeThumbnailImage($filelocation."thumbs/".$current_img, $filelocation.$current_img, $w, $h, $x1, $y1, $scale);
         echo $x1."<br/>".$y1."<br/>".$w."<br/>".$h."<br/>".$scale."<br/>".$current_img;
         //$size = getimagesize($_SERVER['DOCUMENT_ROOT']."/media/images/frontpage/".$current_img);
         //echo $_SERVER['DOCUMENT_ROOT']."/media/images/frontpage/".$current_img."<br/>Done!";
         //print_r($size);
         
         
-   }
-   
+	}
    
    
 }
 
-?>

@@ -1,14 +1,13 @@
 <?php
 class Portfolio extends CI_Controller {
-    function __construct(){
+    public function __construct(){
         parent::__construct();
-        $this->load->model('commonmodel');
         $this->load->library('adminpage');
         $this->load->library('auth');                
         $this->load->model('portfoliomodel');
     }
     
-    function addnew(){
+    public function addnew(){
         $login = $this->auth->is_logged_in();        
         if($login == true){
             if($this->input->post('add', true) =="Add!"){
@@ -50,7 +49,7 @@ class Portfolio extends CI_Controller {
         }
     }
     
-    function listing(){
+    public function listing(){
         $login = $this->auth->is_logged_in();        
         if($login == true){
             $data['result'] = $this->portfoliomodel->alldata();
@@ -64,7 +63,7 @@ class Portfolio extends CI_Controller {
         
     }
     
-    function edit($id){
+    public function edit($id){
         error_reporting(E_ALL);
         $login = $this->auth->is_logged_in();        
         if($login == true){
@@ -115,7 +114,7 @@ class Portfolio extends CI_Controller {
         }
     }
     
-    function delete_portfolio(){
+    public function delete_portfolio(){
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
             $id = ($this->input->post('id', true)*1);
             $old_img = $this->input->post('old_img', true);
@@ -136,4 +135,3 @@ class Portfolio extends CI_Controller {
     }
     
 }
-?>

@@ -2,9 +2,8 @@
 
 class Photos extends CI_Controller {
     
-    function __construct(){
+    public function __construct(){
         parent::__construct();
-        $this->load->model('commonmodel');
         $this->load->library('adminpage');
         $this->load->library('auth');
         $this->load->model('adminmodel');        
@@ -12,15 +11,15 @@ class Photos extends CI_Controller {
     }
     
     
-    function addnew(){
+    public function addnew(){
         $login = $this->auth->is_logged_in();        
         if($login == true){
-        $this->load->helper('form');
-        $data['pagetitle'] = "Upload Photo";
-        $data['albums'] = $this->adminmodel->fetch_albums();
+			$this->load->helper('form');
+			$data['pagetitle'] = "Upload Photo";
+			$data['albums'] = $this->adminmodel->fetch_albums();
                 
                 //start upload process
-		if($this->input->post('upload') == "Upload"){
+			if($this->input->post('upload') == "Upload"){
                     $title = array('img1' => $this->input->post('title1', true),
                                     'img2' => $this->input->post('title2', true));
                     if($title['img1'] != "" || $title['img2'] != ""){
@@ -69,45 +68,45 @@ class Photos extends CI_Controller {
                     //retrieve all files to upload
                     $files = $_FILES;
                     if($upload == true){
-			$config['upload_path']   = './media/images/'.$folder_to_upload; //if the files does not exist it'll be created
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size']   = '8000'; //size in kilobytes
-			$config['encrypt_name']  = true;
+						$config['upload_path']   = './media/images/'.$folder_to_upload; //if the files does not exist it'll be created
+						$config['allowed_types'] = 'gif|jpg|png';
+						$config['max_size']   = '8000'; //size in kilobytes
+						$config['encrypt_name']  = true;
 
-			$this->upload->initialize($config);
-				
-			Foreach($files AS $imgfile => $imgname){ //go through each img upload
-				if(!empty($imgfile)){ //check to see if it's empty
-                                    if($title[$imgfile] != ""){ //if it's not empty check to see if title is not empty
-					if($this->upload->do_upload($imgfile)){  //if not empty then upload
-                                            $imgdata = $this->upload->data(); //get encrypted file data and then insert the filename below
+						$this->upload->initialize($config);
+							
+						Foreach($files AS $imgfile => $imgname){ //go through each img upload
+							if(!empty($imgfile)){ //check to see if it's empty
+								if($title[$imgfile] != ""){ //if it's not empty check to see if title is not empty
+									if($this->upload->do_upload($imgfile)){  //if not empty then upload
+										$imgdata = $this->upload->data(); //get encrypted file data and then insert the filename below
+										
+										$this->photomodel->db_insert_update_photo($imgdata['file_name'], $title[$imgfile], $albumID);
+										//display the name of the file before encryption
+										$data['imgfiles'][] = $imgname['name']." has been uploaded to ".$folder_to_upload."<br/>";
+										//$data['imgfiles'][] = $imgdata['file_name']." has been uploaded to ".$folder_to_upload."<br/>";
+									} else {
+										$data['imgfiles'][] = $this->upload->display_errors();
                                             
-                                            $this->photomodel->db_insert_update_photo($imgdata['file_name'], $title[$imgfile], $albumID);
-                                            //display the name of the file before encryption
-                                            $data['imgfiles'][] = $imgname['name']." has been uploaded to ".$folder_to_upload."<br/>";
-                                            //$data['imgfiles'][] = $imgdata['file_name']." has been uploaded to ".$folder_to_upload."<br/>";
-					} else {
-                                            $data['imgfiles'][] = $this->upload->display_errors();
-                                            
-                                        }
-                                    } 
-				}
-			}//end foreach
+									}
+								} 
+							}
+						}//end foreach
                                 
                     } //if upload = true                 
 			
                 }//if post = upload
 
-		//print_r($files);
-		
-        $this->adminpage->loadpage('admin/photo/upload', $data);
+			//print_r($files);
+			
+			$this->adminpage->loadpage('admin/photo/upload', $data);
         
         } else {
             redirect(base_url().'admin/login');
         }
     }
     
-    function albumlist(){
+    public function albumlist(){
         $login = $this->auth->is_logged_in();        
         if($login == true){
             $data['albums'] = $this->adminmodel->fetch_albums();
@@ -119,7 +118,7 @@ class Photos extends CI_Controller {
         }
     }
     
-    function album($id){
+    public function album($id){
         error_reporting(E_ALL);
         $login = $this->auth->is_logged_in();        
         if($login == true){            
@@ -142,7 +141,7 @@ class Photos extends CI_Controller {
     }
     
                
-    function delete_album(){        
+    public function delete_album(){        
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
             $id = ($this->input->post('id', true)*1);
             $foldername = $this->input->post('foldername', true);
@@ -172,7 +171,7 @@ class Photos extends CI_Controller {
         }
     }
     
-    function update_album(){
+    public function update_album(){
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
             $albumID = ($this->input->post('albumID', true)*1);
             $old_name = $this->input->post('old_album_name', true);
@@ -190,7 +189,7 @@ class Photos extends CI_Controller {
         
     }
     
-    function delete_photo(){
+    public function delete_photo(){
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
             $id = ($this->input->post('id', true)*1);
             $foldername = $this->input->post('foldername', true);
@@ -207,7 +206,7 @@ class Photos extends CI_Controller {
         }
     }
     
-    function update_photo(){
+    public function update_photo(){
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
             $id = ($this->input->post('id', true)*1);
             $title = $this->input->post('title', true);
@@ -223,4 +222,3 @@ class Photos extends CI_Controller {
 }
 
 
-?>

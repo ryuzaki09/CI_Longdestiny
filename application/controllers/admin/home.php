@@ -1,26 +1,23 @@
 <?php
 
 class Home extends CI_Controller{
-    var $loggedin;
+    public $loggedin;
     
-    function __construct(){
+    public function __construct(){
         parent::__construct();
         $this->load->library('adminpage');
         $this->load->library('auth');        
     }
     
-    function index(){        
+    public function index(){        
         $login = $this->auth->is_logged_in();
         
-        if($login == true){            
+        if($login == true)
             $this->adminpage->loadpage('admin/adminpage');
-        }else{
+        else
             redirect(base_url().'admin/login');
-        }
     }
     
-      
     
 }
 
-?>

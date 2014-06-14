@@ -2,30 +2,29 @@
 
 class Profile extends CI_Controller {
     
-    function __construct(){
+    public function __construct(){
         parent::__construct();
         $this->load->library('adminpage');
         $this->load->library('auth');
-        $this->load->model('commonmodel');
         $this->load->model('adminmodel');
     }
     
     
-    function changepwd(){
+    public function changepwd(){
         error_reporting(E_ALL);
         
         $login = $this->auth->is_logged_in();        
         if($login){
         
-        $data['pagetitle'] = "Change Password";        
-        $this->adminpage->loadpage('admin/profile', $data);
+			$data['pagetitle'] = "Change Password";        
+			$this->adminpage->loadpage('admin/profile', $data);
         
         } else {
             redirect(base_url().'admin/login');
         }
     }
     
-    function process(){
+    public function process(){
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
             $data = array('pwd' => $this->input->post('pwd1', true));
 
@@ -33,9 +32,9 @@ class Profile extends CI_Controller {
             $username = $this->session->userdata('uname');
             $result = $this->adminmodel->changepwd($data, $username);
 
-            echo ($result >= 1)
-            ? "true"
-            : "false";
+            echo ($result)
+				? "true"
+				: "false";
         }
     }
     
@@ -43,4 +42,3 @@ class Profile extends CI_Controller {
 }
 
 
-?>
