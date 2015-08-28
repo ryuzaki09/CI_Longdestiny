@@ -19,7 +19,7 @@ class Frontpage extends CI_Controller {
         //$data['css'][] = $this->loadpage->set('css', 'css/jquery.jscrollpane.css');
         //$data['css'][] = $this->loadpage->set('css', 'js/twitter/jScrollPane.css');
         
-        $data['title'] = "LongDestiny.com";   
+        $data['title'] = "SINLUONG";
         $data['contact_page'] = $this->load->view('contact', '', true);
         
         $this->loadpage->loadpage('frontpage', $data);

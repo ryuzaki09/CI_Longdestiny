@@ -1,7 +1,7 @@
 <div class="container" id="container">
 	<div class="item header">
-		<h2 style="width:240px;">Long</h2>
-                <h2 style="width:240px;">Destiny</h2>
+		<h2 style="width:240px;">SIN</h2>
+                <h2 style="width:240px;">LUONG</h2>
 		<p class="subline">.com</p>
 	</div>
 	
@@ -68,7 +68,7 @@
 </div><!-- container -->
 
 <footer class="reference clearfix" style="padding:5px; color:#fff;">
-      <div style="float:left; margin:0 25px 0 10px;">Longdestiny.com</div>
+      <div style="float:left; margin:0 25px 0 10px;">SINLUONG.COM</div>
       <div style="float:right; margin-right:10px;">
           <div class="go_left" style="margin-right:15px;">Follow Me</div>
           <div class="go_left">
