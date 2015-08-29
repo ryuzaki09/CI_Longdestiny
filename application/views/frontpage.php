@@ -50,7 +50,14 @@
                         <!-- Title -->
                 </div> 
 
-                <div id="tweet-container"><img id="loading" src="media/images/twitter/loading.gif" width="16" height="11" alt="Loading.." /></div>
+                <!-- <div id="tweet-container"><img id="loading" src="media/images/twitter/loading.gif" width="16" height="11" alt="Loading.." /></div> -->
+                <div id="tweet-container">
+					<?php
+					foreach($twitter AS $tweets):
+						echo "<div class='tweet-text'>".$tweets->text."</div>";	
+					endforeach;
+					?>
+				</div>
                 <!-- The loading gif animation - hidden once the tweets are loaded -->
                 <div id="scroll"></div>
                 <!-- Container for the tweets -->

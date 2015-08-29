@@ -31,7 +31,8 @@ h2.tut{
 #tweet-container{
 	height:230px;
 	width:auto;
-	overflow:hidden;
+	/* overflow:hidden; */
+	overflow:scroll;
 }
 
 #twitIcon{
