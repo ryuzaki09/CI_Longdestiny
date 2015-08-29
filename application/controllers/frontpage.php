@@ -10,6 +10,7 @@ class Frontpage extends CI_Controller {
     
     public function index(){
         $this->load->model('fpmodel');
+		$this->load->library("twitter");
         
         $data['data'] = $this->fpmodel->all_frontpage_data();
         $data['list_photos'] = $this->fpmodel->all_fpphotos_data();
@@ -18,6 +19,7 @@ class Frontpage extends CI_Controller {
         //$data['css'][] = $this->loadpage->set('css', 'css/twitter.css');
         //$data['css'][] = $this->loadpage->set('css', 'css/jquery.jscrollpane.css');
         //$data['css'][] = $this->loadpage->set('css', 'js/twitter/jScrollPane.css');
+		$twitter = $this->twitter->getTimeline();
         
         $data['title'] = "LongDestiny.com";   
         $data['contact_page'] = $this->load->view('contact', '', true);
