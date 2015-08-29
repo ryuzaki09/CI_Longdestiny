@@ -9,6 +9,7 @@ class Frontpage extends CI_Controller {
   
     
     public function index(){
+		$this->logger->info("loading frontpage");
         $this->load->model('fpmodel');
 		$this->load->library("twitter");
         
