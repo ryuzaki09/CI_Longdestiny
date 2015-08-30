@@ -15,7 +15,7 @@ class Twitter {
 
 
 	public function getTimeline(){
-		$request_url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=ryuzaki09&count=5";
+		$request_url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=ryuzaki09&count=10";
 		// $request_url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=5";
 		$access_token = $this->getToken();
 		$this->CI->logger->info("access token: ".$access_token);
@@ -33,9 +33,9 @@ class Twitter {
 		$this->CI->curl->returnTransfer(true);
 		$result = $this->CI->curl->curlexec();
 		$result_decode = json_decode($result);
-		echo "<pre>";
-		print_r($result_decode);
-		echo "</pre>";
+		// echo "<pre>";
+		// print_r($result_decode);
+		// echo "</pre>";
 		
 		$this->CI->logger->info("timeline response: ".var_export($result, true));
 

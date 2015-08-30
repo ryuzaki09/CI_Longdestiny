@@ -16,8 +16,8 @@ class Frontpage extends CI_Controller {
         $data['data'] = $this->fpmodel->all_frontpage_data();
         $data['list_photos'] = $this->fpmodel->all_fpphotos_data();
         
-        //$data['css'][] = $this->loadpage->set('css', 'css/style.css');        
-        //$data['css'][] = $this->loadpage->set('css', 'css/twitter.css');
+        $data['css'][] = $this->loadpage->set('css', 'css/style.css');        
+        $data['css'][] = $this->loadpage->set('css', 'css/twitter.css');
         //$data['css'][] = $this->loadpage->set('css', 'css/jquery.jscrollpane.css');
         //$data['css'][] = $this->loadpage->set('css', 'js/twitter/jScrollPane.css');
 		$data['twitter'] = $this->twitter->getTimeline();

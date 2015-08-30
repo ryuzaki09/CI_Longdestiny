@@ -1,4 +1,5 @@
 <!doctype html>
+	<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -21,10 +22,10 @@
                     }
                 }
                 ?>
-                <link rel='stylesheet' type='text/css' href='css/style.css' />
-                <link rel='stylesheet' type='text/css' href='css/twitter.css' />
-                <link rel='stylesheet' type='text/css' href='css/jquery.jscrollpane.css' />
-                <link rel='stylesheet' type='text/css' href='js/twitter/jScrollPane.css' />
+                <!-- <link rel='stylesheet' type='text/css' href='css/style.css' /> -->
+                <!-- <link rel='stylesheet' type='text/css' href='css/twitter.css' /> -->
+                <!-- <link rel='stylesheet' type='text/css' href='css/jquery.jscrollpane.css' /> -->
+                <!-- <link rel='stylesheet' type='text/css' href='js/twitter/jScrollPane.css' /> -->
                 
                 <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&v1' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
