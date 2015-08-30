@@ -327,4 +327,7 @@ li.clearfix {
 .twitter_block { margin:5px; background-color:#9BC4E2; float:left; padding:20px; width:260px; height:370px; }
 .project-descr-full .thumbs-wrapper { width:260px !important; }
 .project-descr-full .thumbs-wrapper .thumbs { width:780px !important; }
+#tweet-container .tweet-text { padding:5px 15px; list-style:square; }
+#tweet-container .tweet-text img { max-width:40px; margin-right:5px; }
+/* #tweet-container .tweet-text:last-child { border:none; } */
 

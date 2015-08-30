@@ -1,3 +1,10 @@
+Version 1.0.1
+ - twitter api user timeline fully functional and styled.
+
+Version 1.0.0
+ - created twitter library and added curl library
+ - implemented Twitter API to get user time line.
+
 Version 0.0.5
  - added class to get DB settings from ini file.
 

@@ -11,9 +11,11 @@
                     	<div class="thumbs-wrapper">
                         	<div class="thumbs">                                            
                                           <?php                                          
-                                            foreach($list_photos AS $photos){
-                                                if($photos['windowID'] == $list['id']){ echo "<img src='media/images/frontpage/thumbs/".$photos['imgname']."' />"; }
-                                            } ?>
+                                            foreach($list_photos AS $photos):
+                                                if($photos['windowID'] == $list['id']){ 
+													echo "<img src='media/images/frontpage/thumbs/".$photos['imgname']."' />"; 
+												}
+                                            endforeach; ?>
                             </div>
                         </div>
                         <h2 class="title"><?php echo $list['title']; ?></h2>
@@ -49,8 +51,24 @@
                         <h2 class="tut">My tweets</h2>
                         <!-- Title -->
                 </div> 
+                <div id="tweet-container">
+					<?php
+					foreach($twitter AS $tweets):
+						echo "<li class='tweet-text'>";
+						if($tweets->in_reply_to_screen_name){
+							$reply_name = $tweets->in_reply_to_screen_name;
+							echo str_replace("@$reply_name", "<a href='http://twitter.com/".$reply_name."' target='_blank'>@".$reply_name."</a>", $tweets->text);
+						} elseif($tweets->retweeted_status->user->screen_name) {
+							$reply_name = $tweets->retweeted_status->user->screen_name;
+							echo str_replace("@$reply_name", "<a href='http://twitter.com/".$reply_name."' target='_blank'>@".$reply_name."</a>", $tweets->text);
 
-                <div id="tweet-container"><img id="loading" src="media/images/twitter/loading.gif" width="16" height="11" alt="Loading.." /></div>
+						} else {
+							echo $tweets->text;
+						}
+						echo "</li>";	
+					endforeach;
+					?>
+				</div>
                 <!-- The loading gif animation - hidden once the tweets are loaded -->
                 <div id="scroll"></div>
                 <!-- Container for the tweets -->
