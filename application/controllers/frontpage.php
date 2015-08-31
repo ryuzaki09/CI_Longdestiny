@@ -1,6 +1,8 @@
 <?php
 
 class Frontpage extends CI_Controller {
+
+	const MEM_CACHE_TIMEOUT = 600;
     
     public function __construct(){
         parent::__construct();
@@ -12,7 +14,22 @@ class Frontpage extends CI_Controller {
 		$this->logger->info("loading frontpage");
         $this->load->model('fpmodel');
 		$this->load->library("twitter");
+		$this->load->driver('cache');
+
+		if(!$this->cache->memcached->is_supported())
+			$this->logger->error("Memcached is not supported");
         
+		$twitter = $this->cache->memcached->get("twitter_tweets");
+		if(!$twitter){
+			$twitter = $this->twitter->getTimeline();
+			//save to cache
+			$this->logger->info("saving twitter tweets to memcache");
+			$this->cache->memcached->save("twitter_tweets", $twitter, self::MEM_CACHE_TIMEOUT);
+		} else {
+			$this->logger->info("Using twitter tweets memcached");
+		}
+
+		$data['twitter'] = $twitter;
         $data['data'] = $this->fpmodel->all_frontpage_data();
         $data['list_photos'] = $this->fpmodel->all_fpphotos_data();
         
@@ -20,7 +37,6 @@ class Frontpage extends CI_Controller {
         $data['css'][] = $this->loadpage->set('css', 'css/twitter.css');
         //$data['css'][] = $this->loadpage->set('css', 'css/jquery.jscrollpane.css');
         //$data['css'][] = $this->loadpage->set('css', 'js/twitter/jScrollPane.css');
-		$data['twitter'] = $this->twitter->getTimeline();
         
         $data['title'] = "SINLUONG";
         $data['contact_page'] = $this->load->view('contact', '', true);

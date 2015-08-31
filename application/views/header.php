@@ -10,33 +10,29 @@
 		<meta name="keywords" content="Longdestiny, html, css, css3, jquery, grid, masonry, fullscreen, destiny, flipboard effect" />
 		<meta name="author" content="Longdestiny" />                
                 
-                <?php
-                if (isset($css) && $css){                    
-                    foreach($css AS $style => $value){
-                        echo $value;
-                    }
-                }
-                if (isset($js) && $js){                    
-                    foreach($js AS $script => $key){
-                        echo $key;
-                    }
-                }
-                ?>
-                <!-- <link rel='stylesheet' type='text/css' href='css/style.css' /> -->
-                <!-- <link rel='stylesheet' type='text/css' href='css/twitter.css' /> -->
-                <!-- <link rel='stylesheet' type='text/css' href='css/jquery.jscrollpane.css' /> -->
-                <!-- <link rel='stylesheet' type='text/css' href='js/twitter/jScrollPane.css' /> -->
+			<?php
+			if (isset($css) && $css){                    
+				foreach($css AS $style => $value){
+					echo $value;
+				}
+			}
+			if (isset($js) && $js){                    
+				foreach($js AS $script => $key){
+					echo $key;
+				}
+			}
+			?>
+			<!-- <link rel='stylesheet' type='text/css' href='css/jquery.jscrollpane.css' /> -->
+			<!-- <link rel='stylesheet' type='text/css' href='js/twitter/jScrollPane.css' /> -->
                 
-                <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&v1' rel='stylesheet' type='text/css' />
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&v1' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Ovo' rel='stylesheet' type='text/css' />                
-                               
                 
-                <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> -->
-                <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-                                
-                <script type="text/javascript" src="js/twitter/jScrollPane-1.2.3.min.js"></script>                
-                <script type="text/javascript" src="/js/twitter/twitter.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+						
+		<script type="text/javascript" src="js/twitter/jScrollPane-1.2.3.min.js"></script>                
+		<script type="text/javascript" src="/js/twitter/twitter.js"></script>
                 
 		
 		<!-- Fullscreen jQuery template -->

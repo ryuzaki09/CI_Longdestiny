@@ -16,12 +16,11 @@ class Twitter {
 
 	public function getTimeline(){
 		$request_url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=ryuzaki09&count=10";
-		// $request_url = "https://api.twitter.com/1.1/statuses/mentions_timeline.json?count=5";
 		$access_token = $this->getToken();
-		$this->CI->logger->info("access token: ".$access_token);
-		// $request_url = "https://api.twitter.com/1.1/statuses/home_timeline.json?count=5";
+		// $this->CI->logger->info("access token: ".$access_token);
 
-		$headerdata = array("Authorization: Bearer ".$access_token, "Content-Type: application/x-www-form-urlencoded;charset=UTF-8");
+		$headerdata = array("Authorization: Bearer ".$access_token, 
+							"Content-Type: application/x-www-form-urlencoded;charset=UTF-8");
 
 		// $postdata = array("count" => 5);
 
@@ -37,7 +36,7 @@ class Twitter {
 		// print_r($result_decode);
 		// echo "</pre>";
 		
-		$this->CI->logger->info("timeline response: ".var_export($result, true));
+		// $this->CI->logger->info("timeline response: ".var_export($result, true));
 
 		return $result_decode;
 
@@ -65,11 +64,9 @@ class Twitter {
 		$result_decode = json_decode($result);
 
 		$this->CI->logger->info("response: ".var_Export($result, true));
-		// $this->CI->logger->info("error: ".var_Export($result_decode->{'errors'}, true));
 
 		if($result_decode->{'access_token'}){
 			$this->CI->logger->info("Token retrieved successfully");
-			// $this->CI->logger->info("Token: ".$result_decode->{'access_token'});
 			return $result_decode->{'access_token'};
 		}
 

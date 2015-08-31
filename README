@@ -1,3 +1,6 @@
+Version 1.0.2
+ - added twitter tweets to memcache
+
 Version 1.0.1
  - twitter api user timeline fully functional and styled.
 
