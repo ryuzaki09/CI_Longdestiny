@@ -8,8 +8,8 @@ class Twitter {
 
 	public function __construct(){
 		$this->CI =& get_instance();
-		$this->CI->consumerkey = "dNHzQr7YKzhEat1g8ekjw";
-		$this->CI->consumersecret = "YsooMso14gNVEreDddmNygimlEwGSfJHXtt1mYuWo";
+		$this->CI->consumerkey = commonclass::getConfig("longdestiny.twitter_consumerkey");
+		$this->CI->consumersecret = commonclass::getConfig("longdestiny.twitter_consumersecret");
 		$this->CI->load->library("curl");
 	}
 
