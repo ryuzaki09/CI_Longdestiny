@@ -23,7 +23,6 @@
 			}
 			?>
 			<!-- <link rel='stylesheet' type='text/css' href='css/jquery.jscrollpane.css' /> -->
-			<!-- <link rel='stylesheet' type='text/css' href='js/twitter/jScrollPane.css' /> -->
                 
 		<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&v1' rel='stylesheet' type='text/css' />
 		<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
@@ -31,8 +30,7 @@
                 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 						
-		<script type="text/javascript" src="js/twitter/jScrollPane-1.2.3.min.js"></script>                
-		<script type="text/javascript" src="/js/twitter/twitter.js"></script>
+		<!-- <script type="text/javascript" src="js/twitter/jScrollPane&#45;1.2.3.min.js"></script>                 -->
                 
 		
 		<!-- Fullscreen jQuery template -->
