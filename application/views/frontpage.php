@@ -54,6 +54,8 @@
                 <div id="tweet-container">
 					<?php
 					foreach($twitter AS $tweets):
+						$link = strstr($tweets->text, "http");
+						// $tweets->text = str_replace("http".$link, "<a href='http".$link."'>".$link."</a>", $tweets->tweet);
 						echo "<li class='tweet-text'>";
 						if($tweets->in_reply_to_screen_name){
 							$reply_name = $tweets->in_reply_to_screen_name;
@@ -302,8 +304,8 @@
 								
 			// animate the images container to the position where is going to be on fullview
 			var thumbsstyle 	= {
-				left	: $(window).width() - $thumbsWrapper.width() - 25 + 'px',  // 25 is the margin left / right of the fullview thumbs-wrapper
-				top		: ($(window).height() / 2) - ($thumbsWrapper.height() / 2) - 22 + 'px' // 10 is the margin top / bottom of the fullview thumbs-wrapper
+				right	: $(window).width() - $thumbsWrapper.width() - 1255 + 'px',  // 25 is the margin left / right of the fullview thumbs-wrapper
+				top		: ($(window).height() / 2) - ($thumbsWrapper.height() / 2) - 125 + 'px' // 10 is the margin top / bottom of the fullview thumbs-wrapper
 			};
 			$thumbsWrapper.stop().applyStyle( thumbsstyle, $.extend( true, [], { duration : animspeed, easing : animeasing} ) );
 								
