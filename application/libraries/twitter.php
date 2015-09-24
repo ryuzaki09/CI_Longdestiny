@@ -2,6 +2,7 @@
 
 class Twitter {
 
+	const TWITTER_API_HOST = "https://api.twitter.com";
 
 	private $consumerkey; 
 	private $consumersecret; 
@@ -15,7 +16,7 @@ class Twitter {
 
 
 	public function getTimeline(){
-		$request_url = "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=ryuzaki09&count=10";
+		$request_url = self::TWITTER_API_HOST."/1.1/statuses/user_timeline.json?screen_name=ryuzaki09&count=10";
 		$access_token = $this->getToken();
 		// $this->CI->logger->info("access token: ".$access_token);
 
@@ -36,7 +37,7 @@ class Twitter {
 		// print_r($result_decode);
 		// echo "</pre>";
 		
-		// $this->CI->logger->info("timeline response: ".var_export($result, true));
+		$this->CI->logger->info("timeline response: ".var_export($result_decode, true));
 
 		return $result_decode;
 
@@ -48,7 +49,7 @@ class Twitter {
 		$this->CI->logger->info("Get access token");
 		$bearer_credentials = base64_encode(urlencode($this->CI->consumerkey).":".urlencode($this->CI->consumersecret));
 
-		$url = "https://api.twitter.com/oauth2/token";
+		$url = self::TWITTER_API_HOST."/oauth2/token";
 
 		$headerdata = array("Authorization: Basic ".$bearer_credentials, "Content-Type: application/x-www-form-urlencoded;charset=UTF-8");
 

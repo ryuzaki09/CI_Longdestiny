@@ -54,7 +54,7 @@
                 <div id="tweet-container">
 					<?php
 					foreach($twitter AS $tweets):
-						$link = strstr($tweets->text, "http");
+						$tweets->text = preg_replace('!(http|ftp|scp)(s)?:\/\/[a-zA-Z0-9.?&_/]+!', "<a target='_blank' href=\"\\0\">\\0</a>",$tweets->text);
 						// $tweets->text = str_replace("http".$link, "<a href='http".$link."'>".$link."</a>", $tweets->tweet);
 						echo "<li class='tweet-text'>";
 						if($tweets->in_reply_to_screen_name){
