@@ -10,12 +10,12 @@
                 	<div class="item block" data-bgimage="media/images/frontpage/<?php echo $list['image']; ?>">
                     	<div class="thumbs-wrapper">
                         	<div class="thumbs">                                            
-                                          <?php                                          
-                                            foreach($list_photos AS $photos):
-                                                if($photos['windowID'] == $list['id']){ 
-													echo "<img src='media/images/frontpage/thumbs/".$photos['imgname']."' />"; 
-												}
-                                            endforeach; ?>
+								  <?php                                          
+									foreach($list_photos AS $photos):
+										if($photos['windowID'] == $list['id']){ 
+											echo "<img src='media/images/frontpage/thumbs/".$photos['imgname']."' />"; 
+										}
+									endforeach; ?>
                             </div>
                         </div>
                         <h2 class="title"><?php echo $list['title']; ?></h2>
@@ -54,15 +54,18 @@
                 <div id="tweet-container">
 					<?php
 					foreach($twitter AS $tweets):
-						$tweets->text = preg_replace('!(http|ftp|scp)(s)?:\/\/[a-zA-Z0-9.?&_/]+!', "<a target='_blank' href=\"\\0\">\\0</a>",$tweets->text);
 						// $tweets->text = str_replace("http".$link, "<a href='http".$link."'>".$link."</a>", $tweets->tweet);
+						$tweets->text = preg_replace('!(http|ftp|scp)(s)?:\/\/[a-zA-Z0-9.?&_/]+!', "<a target='_blank' href=\"\\0\">\\0</a>",$tweets->text);
 						echo "<li class='tweet-text'>";
 						if($tweets->in_reply_to_screen_name){
 							$reply_name = $tweets->in_reply_to_screen_name;
 							echo str_replace("@$reply_name", "<a href='http://twitter.com/".$reply_name."' target='_blank'>@".$reply_name."</a>", $tweets->text);
-						} elseif($tweets->retweeted_status->user->screen_name) {
+						} elseif($tweets->retweeted_status) { //RETWEETS. make links clickable
+							$retweet_text = $tweets->retweeted_status->text;
+							$retweet_text = preg_replace('!(http|ftp|scp)(s)?:\/\/[a-zA-Z0-9.?&_/]+!', "<a target='_blank' href=\"\\0\">\\0</a>",$retweet_text);
 							$reply_name = $tweets->retweeted_status->user->screen_name;
-							echo str_replace("@$reply_name", "<a href='http://twitter.com/".$reply_name."' target='_blank'>@".$reply_name."</a>", $tweets->text);
+							$tweettext = "RT @$reply_name: ".$retweet_text;
+							echo str_replace("@$reply_name", "<a href='http://twitter.com/".$reply_name."' target='_blank'>@".$reply_name."</a>", $tweettext);
 
 						} else {
 							echo $tweets->text;
@@ -76,13 +79,6 @@
                 <!-- Container for the tweets -->
             </div>
 		</div>    
-        
-        <!--<div class="item followblock" style="margin:5px; background-color:#9BC4E2; float:left; padding:20px; width:260px; height:370px;">
-            <div>
-                Follow Me
-            </div>
-	</div>-->			
-	       
         
      <div class="clr">&nbsp;</div>
 </div><!-- container -->

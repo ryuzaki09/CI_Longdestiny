@@ -35,8 +35,6 @@ class Frontpage extends CI_Controller {
         
         $data['css'][] = $this->loadpage->set('css', 'css/style.css');        
         $data['css'][] = $this->loadpage->set('css', 'css/twitter.css');
-        //$data['css'][] = $this->loadpage->set('css', 'css/jquery.jscrollpane.css');
-        //$data['css'][] = $this->loadpage->set('css', 'js/twitter/jScrollPane.css');
         
         $data['title'] = "SINLUONG";
         $data['contact_page'] = $this->load->view('contact', '', true);
@@ -75,7 +73,7 @@ class Frontpage extends CI_Controller {
 				echo "true";*/
 				
 				$to = "arlong2k8@googlemail.com";
-				$subject = "Message from LongDestiny.com site!";
+				$subject = "Message from ".base_url()." site!";
 					
 				$body = "Name : " . $from . "<br/>
 						 Email: " . $email . "<br/>
