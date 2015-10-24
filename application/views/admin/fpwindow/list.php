@@ -4,7 +4,7 @@
 if (is_array($listing)){
     foreach($listing AS $list){ ?>
         
-     <div id="item_<?php echo $list['id']; ?>" class="list_div clearfix" style="border-bottom:1px solid #cacaca;">
+     <div id="item_<?php echo $list['id']; ?>" class="list_div clearfix" style="border-top:1px solid #cacaca;">
         <div class="go_left marg_right" style="width:430px;"><?php echo $list['title'] ?></div>
         <div class="go_left marg_right" style="width:150px;"><a href="subphotos/<?php echo $list['id']; ?>">Upload Sub Photos</a></div>
         <div class="go_left marg_right" style="width:50px;"><a href="edit/<?php echo $list['id']; ?>">Edit</a></div>

@@ -4,7 +4,7 @@
 if (is_array($albums)){
     foreach($albums AS $list){ ?>
         
-     <div id="item_<?php echo $list['albumID']; ?>" class="list_div clearfix" style="border-bottom:1px solid #cacaca;">
+     <div id="item_<?php echo $list['albumID']; ?>" class="list_div clearfix" style="border-top:1px solid #cacaca;">
         <div class="go_left marg_right" style="width:400px;"><?php echo $list['folder_name'] ?></div>        
         <div class="go_left marg_right" style="width:50px;"><a href="javascript:void(0);" onclick="edit('<?php echo $list['albumID']; ?>');">Edit</a></div>
         <div class="go_left marg_right" style="width:100px;"><a href="album/<?php echo $list['albumID']; ?>">View Photos</a></div>
@@ -15,10 +15,14 @@ if (is_array($albums)){
             <div class="clearfix">
                 <input type="hidden" id="old_album_name_<?php echo $list['albumID']; ?>" value="<?php echo $list['folder_name']; ?>" />
                 <div class="block150 go_left">Title</div>
-                <div class="block200 go_left"><input type="text" id="new_album_name_<?php echo $list['albumID']; ?>" value="<?php echo $list['folder_name']; ?>" /></div>
+                <div class="block200 go_left">
+					<input type="text" id="new_album_name_<?php echo $list['albumID']; ?>" value="<?php echo $list['folder_name']; ?>" />
+				</div>
             </div>
             <div class="clearfix">
-                <div class="go_left"><input type="button" id="update_title" value="Update" onclick="update_title('<?php echo $list['albumID']; ?>');" /></div>
+                <div class="go_left">
+					<input type="button" id="update_title" class="btn btn-primary" value="Update" onclick="update_title('<?php echo $list['albumID']; ?>');" />
+				</div>
             </div>
         </div>
      </div>

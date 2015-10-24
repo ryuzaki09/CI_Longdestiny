@@ -16,8 +16,8 @@
                 </div>
                 <div class="bottom_space"><input type="text" id="title_<?php echo $album_photos[$i]['pid']; ?>" size="27" value="<?php echo $album_photos[$i]['photo_title']; ?>" /></div>
                 <div>
-                    <input type='button' onclick='delete_photo("<?php echo $album_photos[$i]['pid']; ?>", "<?php echo $album_name->folder_name; ?>","<?php echo $album_photos[$i]['imgname']; ?>")' value='Delete' />
-                    <input type='button' onclick='update_photo("<?php echo $album_photos[$i]['pid']; ?>");' value='Update' />
+                    <input type='button'  class="btn btn-primary" onclick='delete_photo("<?php echo $album_photos[$i]['pid']; ?>", "<?php echo $album_name->folder_name; ?>","<?php echo $album_photos[$i]['imgname']; ?>")' value='Delete' />
+                    <input type='button' onclick='update_photo("<?php echo $album_photos[$i]['pid']; ?>");' value='Update' class="btn btn-primary" />
                 </div>
             </div>
     <?php if($y==3){ echo "<div style='clear:both;'>&nbsp;</div><hr>"; } ?>

@@ -1,10 +1,10 @@
 <h2>Admin Login</h2>
 <div id="adminlogin">    
-    <p class="error"><?php if ($message){ echo($message); } ?></p>
+    <p class="error"><?php if (isset($message)) echo($message); ?></p>
 	<ul>
 		<li>Username: </li><input type="text" name="username" id="username" /><br /><br />
 		<li>Password: </li><input type="password" name="password" id="password" /><br /><br />
-		<li><input type="button" onclick="javascript:loginbtn();" id="login" value="Login" /></li>
+		<li><input type="button" onclick="loginbtn();" id="login" value="Login" /></li>
                 
 	</ul>    
 <br /><br />
@@ -24,11 +24,11 @@
         var url = "login/process_login";
         
         $.post(url, {username: uname, password: pwd}, function(data){
-            if (data == 'true'){            
+            if (data == 'true'){ 
                 window.location ="home";
             }else{
                 alert('Login Failed');
-            }        
+            }
         });
         
     }

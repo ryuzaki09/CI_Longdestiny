@@ -1,11 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html> 
+<html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/admin.css" />
 <link rel="stylesheet" href="/css/jquery.Jcrop.css" type="text/css" />
+<link rel="stylesheet" href="/js/bootstrap/css/bootstrap.min.css" type="text/css" />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/js/jquery-1.9.0.min.js"></script>
 <?php 
 if(isset($css) && $css){
     foreach($css AS $style){
@@ -21,7 +22,8 @@ if(isset($js) && $js){
 
 ?>
 
-<script type="text/javascript" src="/js/jquery-ui-1.8.18.custom.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.10.0.custom.min.js"></script>
+<link rel="stylesheet" src="/css/jquery-ui-1.10.0.custom.min.css" />
 
 <title><?php echo($title) ?></title>
 </head>
@@ -29,6 +31,6 @@ if(isset($js) && $js){
 <a name="top"></a>
 <div id="container">
 	<div id="header">
-        	<img src="<?php echo base_url(); ?>media/images/headerpic.jpg" />	
+        	<img src="/media/images/headerpic2.jpg" />	
 			<br/>
         </div>
