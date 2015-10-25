@@ -7,6 +7,7 @@ class Home extends CI_Controller{
         parent::__construct();
         $this->load->library('adminpage');
         $this->load->library('auth');        
+		$this->load->model("commonmodel");
     }
     
     public function index(){        

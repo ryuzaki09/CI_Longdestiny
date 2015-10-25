@@ -142,3 +142,9 @@ li.clearfix {
 }
 
 .top_space { margin-top:10px; }
+.title_parent {
+	background-color:#64AEEF;
+	color:#fff;
+	padding:5px;
+	margin-bottom:5px;
+}
