@@ -49,7 +49,7 @@
 	<div class="go_left"><input type="text" name="title2" /></div>
 </div>
 <div class="clearfix list_div">
-	<input type="submit" name="upload" value="Upload" />
+	<input type="submit" name="upload" value="Upload" class="btn btn-primary" />
 </div>
 <?php echo form_close(); ?>
 <!--<div id="edit" class="clearfix list_div">

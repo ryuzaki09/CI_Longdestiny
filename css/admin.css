@@ -4,7 +4,7 @@ body
 	margin:0px;
 	font-family: "Levenim MT", "Lucida Grande", sans-serif;
 	font-size:14px;
-        background:#64aeef;
+	background:#64aeef !important;
 }
 a { text-decoration: none; color:#FB5762; }
 a:hover { color:#64AEEF; }
