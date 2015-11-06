@@ -2,12 +2,13 @@
 
 if($pagetitle == "Admin Menu Setup"){
     ?>
-	
-    <div class="go_left">
+    <div class='page_title'><?php echo $pagetitle; ?></div>
 		<?php echo form_open(); ?>
-		<div class="block150 go_left">Name of link: </div>
-		<div class="block250 go_left">
-			<input type="text" name="linkname" />
+		<div class="clearfix">
+			<div class="block150 go_left">Name of link: </div>
+			<div class="block250 go_left">
+				<input type="text" name="linkname" />
+			</div>
 		</div>
 		<div class="clearfix">
 			<div class="block150 go_left">Parent Menu? </div>
@@ -45,12 +46,11 @@ if($pagetitle == "Admin Menu Setup"){
 			<div class="block250 go_left"><input type="submit" name="add_menu" value="Add Menu" class="btn btn-primary btn-small" /></div>
 		</div>
 		<?php echo form_close(); ?>
-	</div>
 <?php
 }
 
 if($pagetitle == "Admin Menu List"){ //ADMIN MENU LIST PAGE
-	echo "<div class='go_left'>";
+	// echo "<div class='content_block go_left'>";
     if(is_array($menu_array)){
 		echo $this->session->flashdata('message');
 		
@@ -102,7 +102,7 @@ if($pagetitle == "Admin Menu List"){ //ADMIN MENU LIST PAGE
 		
 		echo "</div>";	 
     }
-	echo "</div>";
+	// echo "</div>";
 
 }
 ?>

@@ -1,4 +1,3 @@
-<div class="content_block go_left">
 <div class="page_title"><?php echo $pagetitle; ?></div>
 <?php if (isset($message) && $message){ echo $message; } ?>
 <?php
@@ -35,4 +34,3 @@ if (isset($result) && $result){
     </div>
 <?php echo form_close();
  } ?>
-</div>

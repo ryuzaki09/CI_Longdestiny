@@ -1,4 +1,3 @@
-<div class="content_block go_left">
 <div class="page_title"><?php echo $pagetitle; ?></div>
 <!-- Display image names after uploading -->
 <?php if(isset($imgfiles) && is_array($imgfiles)){
@@ -14,7 +13,7 @@
         } ?>
 
 
-<?php echo form_open_multipart(base_url().'admin/photos/addnew'); ?>
+<?php echo form_open_multipart('/admin/photos/addnew'); ?>
 <div class="clearfix list_div">
 	<div class="go_left label2">Upload to Folder</div>
 	<div class="go_left">
@@ -61,7 +60,6 @@
 	<a href="<?php echo base_url().'admin/fpwindows/listing'; ?>">Windows list</a><br/>
 	<a href="http://www.facebook.com">Facebook</a>
 </div>-->
-</div><!-- content_block -->
 
 <!--<script>
 //find all href links except self domain

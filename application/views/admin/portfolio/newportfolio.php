@@ -1,4 +1,3 @@
-<div class="content_block go_left">
 <div class="page_title"><?php echo $pagetitle; ?></div>
 
 <?php echo form_open_multipart(base_url().'admin/portfolio/addnew'); ?>
@@ -22,7 +21,6 @@
     <div class="block200 go_left"><input type="text" name="position" /></div>
 </div>
 <div class="clearfix">    
-    <div class="block200"><input type="submit" name="add" value="Add!" /></div>
+    <div class="block200"><input type="submit" name="add" class="btn btn-primary" value="Add!" /></div>
 </div>
 <?php echo form_close(); ?>
-</div>

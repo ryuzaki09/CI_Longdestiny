@@ -1,4 +1,3 @@
-<div class="content_block go_left">
 <div class="page_title"><?php echo $pagetitle; ?></div>
 <?php
 if (is_array($albums)){
@@ -31,7 +30,7 @@ if (is_array($albums)){
 <?php } 
     
 } ?>
-</div>
+
 <script>
 function edit(id){
     if($('#sub_window_'+id).is(':visible')){
