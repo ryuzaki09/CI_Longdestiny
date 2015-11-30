@@ -47,3 +47,4 @@ $(function() {
     $( "#accordion" ).accordion({ active:false });
 });
 </script>
+<div class="content_block go_left">

@@ -114,6 +114,23 @@ class Home extends CI_Controller{
 		}
     }
 
+	public function menu_sorting(){
+
+		if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH']=='XMLHttpRequest')) {
+			$updateRecordsArray     = $this->input->post('parent' ,true);
+
+			if ($this->input->post('action') == "updateRecordsListings"){
+				$listingCounter = 1;
+
+				foreach ($updateRecordsArray as $recordIDValue):
+					$this->commonmodel->db_sort_menu_position($listingCounter, $recordIDValue);
+					$listingCounter = $listingCounter + 1;
+				endforeach;
+			}
+		}
+ 
+    }
+
   
 }
 

@@ -1,4 +1,3 @@
-<div class="content_block go_left">
     <div class='page_title'><?php echo $pagetitle; ?></div>
     <div class="bottom_space"><b>Note: </b><span class="note">All fields are required.</span></div>
     <?php if(isset($imgfiles) && $imgfiles){ echo $imgfiles; } ?>
@@ -11,29 +10,39 @@
     <?php 
     echo(isset($edit))
         //echo form_open_multipart(base_url().'admin/fpwindows/cropfile'); }
-        ? form_open_multipart(base_url().'admin/fpwindows/edit/'.$item->id)
-        : form_open_multipart(base_url().'admin/fpwindows/addnew'); ?>
+        ? form_open_multipart('/admin/fpwindows/edit/'.$item->id)
+        : form_open_multipart('/admin/fpwindows/addnew'); ?>
     
     <div class="clearfix">
-        <input type="hidden" id="id" value="<?php echo $item->id;  ?>" />
+        <input type="hidden" id="id" value="<?php if(isset($item->id)) echo $item->id; ?>" />
         <div class="block150 go_left">Title</div>
-        <div class="block250 go_left"><input type="text" id="title" name="title" value="<?php echo $item->title;  ?>" /></div>
+        <div class="block250 go_left">
+			<input type="text" id="title" name="title" value="<?php if(isset($item->title)) echo $item->title;  ?>" />
+		</div>
     </div>
     <div class="clearfix">
         <div class="block150 go_left">Sub title</div>
-        <div class="block250 go_left"><input type="text" id="subtitle" name="subtitle" value="<?php echo $item->sub_title; ?>" /></div>
+        <div class="block250 go_left">
+			<input type="text" id="subtitle" name="subtitle" value="<?php if(isset($item->sub_title)) echo $item->sub_title; ?>" />
+		</div>
     </div>
     <div class="clearfix">
         <div class="block150 go_left">Front page description</div>        
-        <div class="block250 go_left"><textarea id="desc1" cols="40" rows="4" name="desc1" ><?php echo $item->desc1; ?></textarea></div>
+        <div class="block250 go_left">
+			<textarea id="desc1" cols="40" rows="4" name="desc1"><?php if(isset($item->desc1)) echo $item->desc1; ?>
+			</textarea>
+		</div>
     </div>
     <div class="clearfix">
         <div class="block150 go_left">Second page description</div>        
-        <div class="block250 go_left"><textarea id="desc2" cols="40" rows="4" name="desc2" ><?php echo $item->desc2; ?></textarea></div>
+        <div class="block250 go_left">
+			<textarea id="desc2" cols="40" rows="4" name="desc2"><?php if(isset($item->desc2)) echo $item->desc2; ?>
+			</textarea>
+		</div>
     </div>
     
-    <!---If there is an image   ---->    
-    <?php if(isset($item->image) && $item->image){ ?>
+	<!-- if there is a image -->
+    <?php if(isset($item->image) && $item->image){ ?> 
             
             <div class="clearfix">
             	<div class="block150 go_left">Current Image</div>
@@ -56,7 +65,7 @@
             </div>
             
             <div class="clearfix bottom_space">
-                <div class="go_left" style="margin-left:160px;"><input type="button" id="crop" value="Crop" /></div>
+                <div class="go_left" style="margin-left:160px;"><input type="button" id="crop" class="btn btn-primary" value="Crop" /></div>
             </div>
             
     <?php } ?>
@@ -75,12 +84,13 @@
         
     <div class="clearfix">
     <?php if(isset($edit)&& $edit){ ?>
-        <div class="block250 go_left"><input type="submit" name="update" value="Update" /></div>
+        <div class="block250 go_left"><input type="submit" name="update" class="btn btn-primary" value="Update" /></div>
     <?php } else { ?>
-        <div class="block250 go_left"><input type="submit" name="submit" value="Add" /></div>
+        <div class="block250 go_left"><input type="submit" name="submit" class="btn btn-primary" value="Add" /></div>
     <?php } ?>
     </div>
     <?php echo form_close(); ?>
+</div>
 </div>
 <script>    
     function preview(img, selection){

@@ -1,4 +1,3 @@
-<div class="content_block go_left">
 <div class="page_title"><?php echo $pagetitle; ?></div>
 <?php if (isset($message) && $message){ echo $message; } ?>
 <?php
@@ -31,8 +30,7 @@ if (isset($result) && $result){
         </div>
     </div>
     <div class="clearfix bottom_space">
-            <input type="submit" name="update" value="Update" />
+            <input type="submit" class="btn btn-primary" name="update" value="Update" />
     </div>
 <?php echo form_close();
  } ?>
-</div>

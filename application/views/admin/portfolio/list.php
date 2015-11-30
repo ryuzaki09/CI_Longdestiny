@@ -1,4 +1,3 @@
-<div class="content_block go_left">
 <div class="page_title"><?php echo $pagetitle; ?></div>
 <?php
 if (is_array($result) && !empty($result)){
@@ -18,7 +17,7 @@ if (is_array($result) && !empty($result)){
 
 
 ?>
-</div>
+
 <script>
 function delete_port(id, old_img){
     var response = confirm('Are you sure you want to delete?');

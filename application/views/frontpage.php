@@ -60,7 +60,7 @@
 						if($tweets->in_reply_to_screen_name){
 							$reply_name = $tweets->in_reply_to_screen_name;
 							echo str_replace("@$reply_name", "<a href='http://twitter.com/".$reply_name."' target='_blank'>@".$reply_name."</a>", $tweets->text);
-						} elseif($tweets->retweeted_status) { //RETWEETS. make links clickable
+						} elseif(isset($tweets->retweeted_status)) { //RETWEETS. make links clickable
 							$retweet_text = $tweets->retweeted_status->text;
 							$retweet_text = preg_replace('!(http|ftp|scp)(s)?:\/\/[a-zA-Z0-9.?&_/]+!', "<a target='_blank' href=\"\\0\">\\0</a>",$retweet_text);
 							$reply_name = $tweets->retweeted_status->user->screen_name;

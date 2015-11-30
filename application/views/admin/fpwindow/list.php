@@ -1,4 +1,4 @@
-<div class="content_block go_left">
+<!-- <div class="content_block go_left"> -->
     <div class='page_title'><?php echo $pagetitle; ?></div>
 <?php
 if (is_array($listing)){
@@ -15,7 +15,6 @@ if (is_array($listing)){
 <?php } 
     
 } ?>
-</div>
 <script>
 function delete_item(id){
     var response = confirm('Delete Item?');
