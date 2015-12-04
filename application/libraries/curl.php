@@ -43,7 +43,7 @@ class Curl {
 
 	public function postfields($postfields){
 		if($postfields)
-			curl_setopt($this->CI->ch, CURLOPT_POSTFIELDS, $postfields); 
+			curl_setopt($this->CI->ch, CURLOPT_POSTFIELDS, http_build_query($postfields)); 
 	}
 
 	public function http_header($http_headers){
