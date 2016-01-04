@@ -3,6 +3,8 @@
 class Frontpage extends CI_Controller {
 
 	const MEM_CACHE_TIMEOUT = 600;
+	// const MEM_CACHE_TIMEOUT = 30;
+	const CACHE = true;
     
     public function __construct(){
         parent::__construct();
@@ -20,7 +22,7 @@ class Frontpage extends CI_Controller {
 			$this->logger->error("Memcached is not supported");
         
 		$twitter = $this->cache->memcached->get("twitter_tweets");
-		if(!$twitter){
+		if(!$twitter && self::CACHE){
 			$twitter = $this->twitter->getTimeline();
 			//save to cache
 			$this->logger->info("saving twitter tweets to memcache");

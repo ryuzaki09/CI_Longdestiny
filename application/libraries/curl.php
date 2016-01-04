@@ -37,13 +37,14 @@ class Curl {
 	}
 
 	public function userPwd($userPwd){
-		if(is_string($userPwd))
+		if(is_string($userPwd)) 
 			curl_setopt($this->CI->ch, CURLOPT_USERPWD, $userPwd);
 	}
 
 	public function postfields($postfields){
-		if($postfields)
+		if($postfields){
 			curl_setopt($this->CI->ch, CURLOPT_POSTFIELDS, http_build_query($postfields)); 
+		}
 	}
 
 	public function http_header($http_headers){
@@ -52,7 +53,7 @@ class Curl {
 	}
 
 	public function curl_get($get){
-		if(is_bool($get) && ($get))
+		if(is_bool($get))
 			curl_setopt($this->CI->ch, CURLOPT_HTTPGET, $get);
 	}
 
@@ -69,4 +70,9 @@ class Curl {
 		curl_close($this->CI->ch);
 	}
 
+	public function followLocation($follow){
+
+		if(is_bool($follow))
+			curl_setopt($this->CI->ch, CURLOPT_FOLLOWLOCATION, $follow);
+	}
 }
