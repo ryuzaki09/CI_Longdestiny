@@ -53,7 +53,7 @@ class Twitter {
 
 		$headerdata = array("Authorization: Basic ".$bearer_credentials, "Content-Type: application/x-www-form-urlencoded;charset=UTF-8");
 
-		$postbody = "grant_type=client_credentials";
+		$postbody = array("grant_type" => "client_credentials");
 
 		$this->CI->curl->curl_url($url);
 		$this->CI->curl->curl_post(true);
@@ -64,14 +64,14 @@ class Twitter {
 		$result = $this->CI->curl->curlexec();
 		$result_decode = json_decode($result);
 
-		$this->CI->logger->info("response: ".var_Export($result, true));
+		$this->CI->logger->info("token response: ".var_Export($result, true));
 
-		if($result_decode->{'access_token'}){
+		if(isset($result_decode->{'access_token'})){
 			$this->CI->logger->info("Token retrieved successfully");
 			return $result_decode->{'access_token'};
 		}
 
-		if($result_decode->{'errors'}){
+		if(isset($result_decode->{'errors'})){
 			$this->CI->logger->info("response: ".var_Export($result, true));
 			$this->CI->logger->info("Cannot get Token");
 			return false;
