@@ -8,11 +8,13 @@ class Plex {
 	private $body;
 	private $query;
 	private $control;
+	private $header_clientid;
 
 	public function __construct(){
 		$this->CI =& get_instance();
 		$this->CI->url = commonclass::getConfig("home.home_endpoint");
 		$this->CI->body = NULL;
+		$this->CI->header_clientid = commonclass::getConfig("home.home_clientid_header");
 	}
 
 
@@ -20,12 +22,12 @@ class Plex {
 	public function sendRequest($url){
 		// $body = json_encode($this->CI->body);
 		$header = array("Content-type: application/json",
-						"Client-ID: ryuzakiluong");
+						"Client-ID: ".$this->CI->header_clientid);
 						// "Content-length: ".strlen($body)
 					//	);
 		
 		$this->CI->logger->info("url: ".$this->CI->url.$url);
-		// $this->CI->logger->info("body: ".var_Export($this->CI->body, true));
+		// $this->CI->logger->info("header: ".var_Export($header, true));
 
 		$this->CI->load->library("curl");
 		$this->CI->curl->curl_url($this->CI->url.$url);
