@@ -39,6 +39,7 @@
 
 			//get settings from config
 			// $this->mode        = $this->_ci->config->item('mode', 'twilio');
+			$this->mode = "sandbox";
 			$this->account_sid = commonclass::getConfig("longdestiny.twilio_accountsid");
 			$this->auth_token = commonclass::getConfig("longdestiny.twilio_authtoken"); 
 			$this->api_version = commonclass::getConfig("longdestiny.twilio_api_version");
@@ -87,7 +88,6 @@
 				$data['From'] = $this->number;
 
 			$response = $this->_twilio->request($url, 'POST', $data);
-			var_dump($response);
 			return $response;
 		}
 
@@ -215,6 +215,8 @@
             foreach($vars AS $key=>$value)
                 $encoded .= "$key=".urlencode($value)."&";
             $encoded = substr($encoded, 0, -1);
+
+			// error_log("encoded: ".var_export($encoded, true));
 
             // construct full url
             $url = "{$this->Endpoint}/$path";

@@ -4,12 +4,17 @@
 class Twilio extends CI_Controller {
 	
 	private $home_url;
+	private $code;
+	private $message;
+
 	const MY_NUMBER = "+447500110989";
 	const MY_AGENT = "Nexus 5X";
 
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('twiliosms');
+		$this->config->load("plex");
+		$this->load->library("plex");
 
 	}
 
@@ -17,16 +22,6 @@ class Twilio extends CI_Controller {
 	{
 		if($this->checkVerifiedUser($require)){
 			$this->logger->info("sending sms");
-				//TESTED and Working
-				// $from = "+447492888257";
-				// $to = '+447500110989';
-				// $message = 'This is a test...';
-				// $response = $this->twiliosms->sms($from, $to, $message);
-				// if($response->IsError)
-				// 	echo 'Error: ' . $response->ErrorMessage;
-				// else
-				// 	echo 'Sent message to ' . $to;
-				// exit;
 		} 
 
 		echo "Go away!";
@@ -38,74 +33,46 @@ class Twilio extends CI_Controller {
 
 	}
 
-	public function reply($require){
+	public function reply($require=false){
 		$this->logger->info("reply called!");
+		// $this->logger->info("post: ".var_Export($_POST, true));
 		//check the request
 		if($this->checkRequest()){
-			$from = $_POST['To'];
-			$to = self::MY_NUMBER;
+			// $from = $_POST['To'];
+			// $this->logger->info("post: ".var_Export($_POST, true));
+			$body = explode(" ",$_POST['Body']);
+			// $this->logger->info("body: ".var_Export($body, true));
+			// $body = array("download", "naruto");
+			
+			$url = $this->getActionUrl($body);
+			if(!$url)
+				$this->sendSMS();
 
-			if(!$this->checkAction()){
-				$message = "Message from ".$_POST['From'].": ".$_POST['Body'];
-				$response = $this->twiliosms->sms($from, $to, $message);
-				if($response->IsError)
-					$this->logger->info('Error: ' . $response->ErrorMessage);
-				else
-					$this->logger->info('Sent message to ' . $to);
+			$result = $this->processAction($body, $url);
+			// $result = NULL;
+			if(!$result)
+				$this->sendSMS();
+
+			$result = json_decode($result, true);
+			$this->logger->info("result: ".var_Export($result, true));
+			$this->message = "From Homeserver\n";
+
+			if(isset($result['data'])){
+				$this->message .= "Reply back with the number of which movie you want to see.\n";
+
+				foreach($result['data'] AS $data => $value):
+					$this->message .= $data.". ".$value['title']."\n";
+				endforeach;
+			} else {
+				$this->message .= $result['message']."\n";
 			}
-			exit;
+
+			$this->logger->info("message: ".var_Export($this->message, true));
+			$this->sendSMS();
+
 		}
 
 	}
-
-	// public function report(Exception $e)
-	// {
-
-	// 	$this->_notifyThroughSms($e);
-	// 	return parent::report($e);
-
-	// }
-
-	// private function _notifyThroughSms($e)
-	// {
-	// 	foreach($this->_notificationRecipients() AS $recipient):
-	// 		$this->_sendSms(
-	// 			$recipient->phone_number,
-	// 			'[This is a test] It appears the server'.
-	// 			' is having issues. Exception: '.$e->getMessage().
-	// 			' Go to http://newrelic.com for more details.'
-	// 			);
-	// 	endforeach;
-
-	// }
-
-	// private function _sendSms($to, $message)
-	// {
-	// 	$accountSid = env('TWILIO_ACCOUNT_SID');
-	// 	$token		= env('TWILIO_AUTH_TOKEN');
-	// 	$twilioNo	= env('TWILIO_NUMBER');
-
-	// 	$twilioService = new Services_Twilio($accountSid, $token);
-
-	// 	try {
-	// 		$twilioService->account->messages->create(
-	// 			[
-	// 				'From' => $twilioNo,
-	// 				'To' => $to,
-	// 				'Body' => $message
-	// 			]
-	// 		);
-	// 		$this->logger->info("Message sent to: ".$to);
-
-	// 	} catch(Services_Twilio_RestException $e) {
-	// 		$this->logger->error("Could not send sms notification".
-	// 							" Twilio replied with: ".$e
-	// 							);
-
-	// 	}
-
-
-	// }
 
 
 	private function checkVerifiedUser($require)
@@ -132,50 +99,142 @@ class Twilio extends CI_Controller {
 
 	}
 
-	// private function checkAction()
-	public function checkAction()
+	private function getActionUrl($body)
+	// public function checkAction()
 	{
-		// $body = explode(" ", $this->input->post("body", true));
-		$body = "Plex music play song";
-		// $body = explode(" ", $body);
+		// $smsbody = "play movies robocop";
+		// $body = explode(" ", $smsbody);
+		// $word = str_replace("+", " ", $body[2]);
+		// print_r($word);
+
+		// exit;
+		// $body = explode(" ", $this->input->post("Body", true));
+		// $body = explode(" ", $_POST['Body']);
+		// $smsbody = "play movies robocop";
+		// $this->logger->info("smsbody: ".var_Export($body, true));
+		// $body = explode(" ", $smsbody);
+		// $body = array("download");
+		// $this->logger->info("body: ".var_Export(http_build_query($body), true));
+		// $this->logger->info("3: ".urlencode(base64_encode($body[2])));
+		// 
+		// exit;
 		//sample DATA
-		$body = array("plex", "music", "play", "song");
-		if(!$this->checkLibraryAction($body[0]))
-			return false;
-		
-		$this->processAction($body);
+		// $body = array("play", "music", "song");
+		$this->logger->info("processing action");
+		return $this->checkLibraryAction(strtolower($body[0]));
+		// $this->logger->info("url: ".var_Export($url, true));
+		// if(!$url)
+		// 	return false;
+		// 
+		// return $url;
+		// $this->logger->info("processing action");
+		// $this->logger->info("processAction result: ".var_Export($result, true));
+		// print_r($result);
+		// return $result;
 	
 	}
 
 
-	private function processAction($body){
+	private function processAction($body, $url){
+		$this->logger->info("process body: ".var_export($body, true));
 
-		if(strtolower($body[0]) == "plex"){
-			$this->config->load("plex");
-			$this->load->library("plex");
+		if(strtolower($body[0]) == "play"){
+			//check next value
 			$category = $this->config->item("category");
 
 			if(!in_array($body[1], $category))
 				return false;
-			
-			$control = strtolower($body[2]);
-			$this->plex->setControl($control);
-			if($control == "search")
-				$this->plex->setQuery($body[3]);
-			echo "im here";	
 
+		
+			$query = str_replace("+", " ", $body[2]);
+			
+			$postdata = array("control" => $body[0],
+								"category" => $body[1],
+								"keyword" => $query
+							);	
+			$this->plex->setBody($postdata);
+
+			// $control = strtolower($body[0]);
+			//set control
+			// $this->plex->setControl($control);
+			//if control is search then set the query
+			// if($control == "search")
+			// $this->plex->setQuery($body[2]);
+			//set category
+			
+			// $this->plex->setCategory($body[1]);
+			$this->logger->info("postdata: ".var_export($postdata, true));
+			return $this->plex->sendRequest($url);
+
+		}
+
+		if(strtolower($body[0]) == "download"){
+			if (!isset($body[1])){
+				$this->code = 502;
+				$this->message = "missing query";
+				return false;
+			}
+			$query = str_replace("+", " ", $body[1]);
+			$postdata = array("query" => $query);
+			if(isset($body[2]) && is_numeric($body[2]))
+				$postdata['episode'] = $body[2];
+
+			$this->plex->setBody($postdata);
+			$this->logger->info("postdata: ".var_export($postdata, true));
+			return $this->plex->sendRequest($url);
+		}
+
+	}
+
+	//GET url of Control from config
+	private function checkLibraryAction($action){
+		$this->logger->info("get action: ".$action);
+
+		$all_actions = $this->config->item("methods");
+		// $this->logger->info("all methods: ".var_export($all_actions, true));
+		if(array_key_exists($action, $all_actions))
+			return $all_actions[$action];
+		
+		return false;
+
+	}
+
+	public function get($keyword=false){
+
+		if(!$keyword){
+			echo "Not allowed";
+			exit;
+		}
+
+		$configKeywords = $this->config->item("getKeywords");
+		// print_R($configKeywords);
+		if(in_array($keyword, $configKeywords)){
+			// $data = $configKeywords[$keyword];
+			$this->plex->setBody(array("keyword" => $keyword));
+			$result = $this->plex->sendRequest("plex/__getDetails");
+			print_r($result);
+			// echo "here";
+
+		} else {
+
+			echo "Not Allowed";
 		}
 
 
 	}
+	
+	private function sendSMS(){
 
-	private function checkLibraryAction($action){
+		// $message = "Message from ".$_POST['From'].": ".$_POST['Body'];
+		if(!$this->message)
+			$this->message = "Something went wrong";
+		$response = $this->twiliosms->sms(self::MY_NUMBER, self::MY_NUMBER, $this->message);
+		if($response->IsError)
+			$this->logger->info('Error: ' . $response->ErrorMessage);
+		else
+			$this->logger->info('Sent message to ' . self::MY_NUMBER);
 
-		$all_actions = array("plex", "torrent");
-		if(in_array($action, $all_actions))
-			return true;
-		
-		return false;
+		exit;
 
 	}
 
