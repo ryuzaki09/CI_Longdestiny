@@ -107,30 +107,11 @@ class Twilio extends CI_Controller {
 		// $word = str_replace("+", " ", $body[2]);
 		// print_r($word);
 
-		// exit;
-		// $body = explode(" ", $this->input->post("Body", true));
-		// $body = explode(" ", $_POST['Body']);
-		// $smsbody = "play movies robocop";
-		// $this->logger->info("smsbody: ".var_Export($body, true));
-		// $body = explode(" ", $smsbody);
-		// $body = array("download");
-		// $this->logger->info("body: ".var_Export(http_build_query($body), true));
-		// $this->logger->info("3: ".urlencode(base64_encode($body[2])));
-		// 
-		// exit;
 		//sample DATA
 		// $body = array("play", "music", "song");
 		$this->logger->info("processing action");
 		return $this->checkLibraryAction(strtolower($body[0]));
 		// $this->logger->info("url: ".var_Export($url, true));
-		// if(!$url)
-		// 	return false;
-		// 
-		// return $url;
-		// $this->logger->info("processing action");
-		// $this->logger->info("processAction result: ".var_Export($result, true));
-		// print_r($result);
-		// return $result;
 	
 	}
 
@@ -184,6 +165,23 @@ class Twilio extends CI_Controller {
 			return $this->plex->sendRequest($url);
 		}
 
+		if(strtolower($body[0]) == "hkdrama" || strtolower($body[0]) == "jdrama"){
+			// if (!isset($body[1])){
+			// 	$this->code = 502;
+			// 	$this->message = "missing query";
+			// 	return false;
+			// }
+			$postdata = array("query" => false, "episode" => false);
+			if(isset($body[1]))
+				$postdata['query'] = str_replace("+", " ", $body[1]);
+
+			if(isset($body[2]) && is_numeric($body[2]))
+				$postdata['episode'] = $body[2];
+
+			$this->plex->setBody($postdata);
+			$this->logger->info("postdata: ".var_export($postdata, true));
+			return $this->plex->sendRequest($url);
+		}
 	}
 
 	//GET url of Control from config
@@ -225,7 +223,6 @@ class Twilio extends CI_Controller {
 	
 	private function sendSMS(){
 
-		// $message = "Message from ".$_POST['From'].": ".$_POST['Body'];
 		if(!$this->message)
 			$this->message = "Something went wrong";
 		$response = $this->twiliosms->sms(self::MY_NUMBER, self::MY_NUMBER, $this->message);
