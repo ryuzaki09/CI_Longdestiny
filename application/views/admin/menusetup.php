@@ -226,6 +226,7 @@ $(function(){
 	    cursor: 'move', 
 	    update: function() {
 		    var order = $(this).sortable("serialize") + '&action=updateRecordsListings';
+            console.log(order);
 
 		    $.post("menu_sorting", order, function(theResponse){
 			    if(theResponse){

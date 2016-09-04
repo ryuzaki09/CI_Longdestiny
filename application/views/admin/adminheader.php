@@ -31,6 +31,6 @@ if(isset($js) && $js){
 <a name="top"></a>
 <div id="container">
 	<div id="header">
-        	<img src="/media/images/headerpic.jpg" />	
+        	<!-- <img src="/media/images/headerpic.jpg" />	 -->
 			<br/>
         </div>
